@@ -1,6 +1,10 @@
-N <- ncol(data);
-formula <- names(data)[N];
-for (i in 1:N-1) {
- name <- paste(name, names(data)[i]);
+N    <- ncol(data);
+form <- names(data)[N];
+form <- paste(form, " ~ ");
+form <- paste(form, names(data)[1]);
+if (N > 3) {
+  for (i in 3:N-1) {
+    form <- paste(form, "+");
+    form <- paste(form, names(data)[i]);
+  }
 }
-
