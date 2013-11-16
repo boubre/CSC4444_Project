@@ -1,0 +1,44 @@
+\documentclass[mathserif]{beamer}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usetheme{Copenhagen}
+
+\begin{document}
+	\title[Analyzing Stochastic Time-Series Data]{Techniques for Analyzing Stochastic Time-Series Data}
+	\author[Castleberry \and Oubre \and Yu]{Dennis Castleberry \and Brandon Oubre \and Haikou Yu}
+	\date{\today}
+	\frame{\titlepage}
+	
+	\section{The Naive Bayes Classifier}
+	\subsection{Overview}
+	\begin{frame}
+		\frametitle{The Naive Bayes Classifier}
+		\begin{itemize}
+			\item Reduce classification to probability. What is \(P(class | attribute1, attribute2, ..., attributeN)\).
+			\item Assumes that each attribute is independent of the others. (Hence the ``Naive'' nickname.)
+			\item For example, let's consider if a car is stolen using \(P(stolen | Color, Type)\). Naive Bayes will assume \(color=red\) and \(type=sportscar\) to be independent.
+			\item Naive Bayes is not sensitive to irrelevant attributes, since the probabilities of such attributes will be similar for all classes.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Advantages and Disadvantages of Naive Bayes}
+		\textbf{Advantages}
+		\begin{itemize}
+			\item Only requires a single scan to train.
+			\item Fast classification.
+			\item Handles real and discrete data.
+			\item Not sensitive to irrelevant attributes.
+		\end{itemize}
+		\textbf{Disadvantages}
+		\begin{itemize}
+			\item Assumes all attributes to be independent.
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Training}
+	\begin{frame}
+		\frametitle{Training the Classifier}
+	\end{frame}
+		
+\end{document}
