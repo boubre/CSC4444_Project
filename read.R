@@ -1,5 +1,17 @@
+# Required libraries
 library(e1071);
 library(neuralnet);
 library(kernlab);
 
-data <- read.table("example.csv", sep=",", header=TRUE);
+# Training data
+td <- read.table("example.csv", sep=",", header=TRUE);
+N  <- ncol(td);
+tx <- td[-N];
+ty <- as.factor(td[[N]]);
+
+# Validation data
+vd <- td;
+vx <- vd[-N];
+vy <- as.factor(vd[[N]]);
+
+#args <- commandArgs();
