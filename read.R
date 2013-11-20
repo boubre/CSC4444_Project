@@ -12,6 +12,6 @@ ty <- as.factor(td[[N]]);
 # Validation data
 vd <- td;
 vx <- vd[-N];
-vy <- as.factor(vd[[N]]);
+vy <- vd[N];
 
 #args <- commandArgs();
