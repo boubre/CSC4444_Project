@@ -2,6 +2,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{graphicx}
 \usetheme{Copenhagen}
 
 \begin{document}
@@ -58,8 +59,35 @@
 	\end{frame} 
 	
 	\section{Support Vector Machine}
+	\subsection{Overview}
 	\begin{frame}
 		\frametitle{Support Vector Machines (SVM)}
+		\begin{itemize}
+			\item Idea is to draw a line (or hyperplane) between the data points of different classes. Classify unseen data by testing which side of the line it is on.
+			\item Focus on support vectors, or the points that would change the line if removed from the training data.
+			\item Find an optimal line to separate the data. Such a line will have the larger margin for data points and should mis-classify the least number of new points.
+			\item If data is not linearly separable, then a transformation of the data to a new basis can be performed. The data may be linearly separable in the new basis.
+		\end{itemize}
+	\end{frame}
+	
+	\subsection{Example}
+	\begin{frame}
+		\frametitle{SVM Example}
+		\begin{columns}[t]
+			\column{.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[keepaspectratio,scale=2]{SVM.png} \\ \vspace{5px}
+				\Tiny{Image from \url{http://docs.opencv.org/doc/tutorials/ml/introduction_to_svm/introduction_to_svm.html}}
+			\end{figure}
+			
+			\column{.5\textwidth}
+			\begin{itemize}
+				\item Solid Figures are support vectors.
+				\item Due to the maximized margin, unseen figures can be closer to the line than the support vectors and still be correctly classified.
+				\item It is easy to see how new points are classified.
+			\end{itemize}
+		\end{columns}
 	\end{frame}
 	
 	\section{Neural Network}
