@@ -11,8 +11,11 @@
 	\date{\today}
 	\frame{\titlepage}
 	
-	\section{Naive Bayes}
-	\subsection{Overview}
+	\section{Project Overview}
+	
+	\section{Background}
+	\subsection{Naive Bayes}
+	\subsubsection{Overview}
 	\begin{frame}
 		\frametitle{The Naive Bayes Classifier}
 		\begin{itemize}
@@ -24,7 +27,7 @@
 		\end{itemize}
 	\end{frame}
 	
-	\subsection{Example}
+	\subsubsection{Example}
 	\begin{frame}
 		\frametitle{Naive Bayes in Action}
 		\begin{center} 
@@ -58,8 +61,8 @@
 		Since \(P(Male|Data) > P(Female|Data)\), we classify the unseen point as Male. For multiple classes, just select the class with the greatest probability!
 	\end{frame} 
 	
-	\section{Support Vector Machine}
-	\subsection{Overview}
+	\subsection{Support Vector Machine}
+	\subsubsection{Overview}
 	\begin{frame}
 		\frametitle{Support Vector Machines (SVM)}
 		\begin{itemize}
@@ -70,7 +73,7 @@
 		\end{itemize}
 	\end{frame}
 	
-	\subsection{Example}
+	\subsubsection{Example}
 	\begin{frame}
 		\frametitle{SVM Example}
 		\begin{columns}[t]
@@ -90,8 +93,8 @@
 		\end{columns}
 	\end{frame}
 	
-	\section{Neural Network}
-	\subsection{Overview}
+	\subsection{Neural Network}
+	\subsubsection{Overview}
 	\begin{frame}
 		\frametitle{Neural Networks}
 		\begin{itemize}
@@ -103,12 +106,12 @@
 		\end{itemize}
 	\end{frame}
 	
-	\subsection{Structure and Classification}
+	\subsubsection{Structure and Classification}
 	\begin{frame}
 		\frametitle{An Artificial Neuron}
 		\begin{figure}
 			\centering
-			\includegraphics[keepaspectratio,scale=.95]{NN_1.jpg} \\
+			\includegraphics[keepaspectratio,scale=.9]{NN_1.jpg} \\
 			\Tiny{Image from \url{http://www.ai-junkie.com/ann/evolved/nnt1.html}}
 		\end{figure}
 	\end{frame}
@@ -131,5 +134,55 @@
 			\end{itemize}
 		\end{columns}
 	\end{frame}
+	
+	\subsection{K-Nearest Neighbor (KNN)}
+	\subsubsection{Overview}
+	\begin{frame}
+		\frametitle{K-Nearest Neighbor}
+		\begin{itemize}
+			\item Assumes that data vectors lie in a metric space.
+			\item Training is simple. KNN stores all of the training data points with no computation. (KNN is lazy.) 
+			\item Classification is also simple. To classify point \(x\), find the k points in the training data closest to \(x\). Classify \(x\) as the majority vote its k-nearest neighbors.
+			\item Can also weight votes based on the distance of the the neighbors.
+			\item KNN suffers from the curse of dimensionality. (In high dimensions points start to become equidistant. This means metrics such as Euclidean distance become unhelpful.)
+		\end{itemize}
+	\end{frame}
+	
+	\subsubsection{Example}
+	\begin{frame}
+		\frametitle{KNN Example}
+		\begin{columns}[t]
+			\column{.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[keepaspectratio,scale=0.5]{KNN.png} \\ \vspace{5px}
+				\Tiny{Image from \url{http://en.wikipedia.org/wiki/File:KnnClassification.svg}}
+			\end{figure}
+			
+			\column{.5\textwidth}
+			\begin{itemize}
+				\item Red and blue points represent training data.
+				\item The green point is being classified.
+				\item For \(k=3\) the point is classified as red.
+				\item For \(k=5\) the point is classified as blue.
+				\item Weighting votes by distance may shift favor back to red.
+			\end{itemize}
+		\end{columns}
+	\end{frame}
+	
+	\subsection{CART}
+	\subsubsection{Overview}
+	\begin{frame}
+		\frametitle{Classification and Regression Tree (CART)}
+	\end{frame}
+	
+	\section{Implementation}
+	
+	
+	\section{Experimental Design}
+	
+	
+	\section{Experimental Results}
+	
 	
 \end{document}
