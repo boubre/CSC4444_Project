@@ -48,6 +48,18 @@ for (i in 1:N-1) {
       tx[j,D] <- td[j-1,D];
     }
   }
+
+  # Append last row to training data
+#  tx[1,D] <- td[1,D];
+#  if (i > 1) {
+#    # Time series
+#    T[[i]] <- ts(td);
+#    for (j in 2:i) {
+#      for (k in 1:D) {
+#        tx[j,k] <- td[j-1,k];
+#      }
+#    }
+#  }
   
 
   # Target
@@ -72,4 +84,3 @@ for (i in 1:N-1) {
 #      plot(T[[i]]);
 #    }
 #}, interval = 0.05, movie.name = "bm_demo.gif", ani.width = 600, ani.height = 600)
-
