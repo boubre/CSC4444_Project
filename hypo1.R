@@ -49,16 +49,29 @@ while (i < N) {
   ty <- td[1:i, D];
   ty <- as.factor(ty);
 
+  # Append last class value to training data
+  tx[1,D] <- td[1,D];
+  if (i > 1) {
+    # Time series
+    T[[i]] <- ts(td);
+    for (j in 2:i) {
+      tx[j,D] <- td[j-1,D];
+    }
+  }
+
   # Target
   vd <- d[i+1,  ];
   vx <- d[i+1,-D];
   vy <- d[i+1, D];
 
+  # Append last class to validation entry 
+  vx[1, D] <- d[i, D];
+
   # Classifier models
   ann   <- neuralnet(formula=f, data=td, threshold=.5);
   bayes <- naiveBayes(x=tx, y=ty);
   knn   <- knn(td, vd, cl=ty);
-  svm   <- svm(tx, ty, gamma=10, type="C-classification");
+  #svm   <- svm(tx, ty, gamma=10, type="C-classification");
 
 
   # Increment _hits for each correct classification
@@ -68,9 +81,9 @@ while (i < N) {
   if (knn==vy) {
     knn_hits <- knn_hits + 1;
   }
-  if (predict(svm, vx)==vy) {
-    svm_hits <- svm_hits + 1;
-  }
+  #if (predict(svm, vx)==vy) {
+  #  svm_hits <- svm_hits + 1;
+  #}
 
   i<-i+1;
 
