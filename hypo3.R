@@ -39,6 +39,10 @@ knn_hits   <- 0;
 svm_hits   <- 0;
 
 
+# Alpha and m for moving average 
+a = c(.5, .25, .125);
+m = 3;
+
 # Loop over data
 while (i < N) {
 
@@ -49,7 +53,7 @@ while (i < N) {
   ty <- td[1:i, D];
   ty <- as.factor(ty);
 
-  # Append last row to training data
+  # Append MA of last m values using a-weights
   for (k in 1:D) {
     tx[1,D-1+k] <- td[1,k];
   }
@@ -58,7 +62,14 @@ while (i < N) {
     T[[i]] <- ts(td);
     for (j in 2:i) {
       for (k in 1:D) {
-        tx[j,D-1+k] <- td[j-1,k];
+        if (i > m) {
+          for (l in 1:m) {
+            tx[j,D-1+k] <- tx[j,D-1+k] + a[l]*td[j-1-l,k];
+          }
+          tx[j,D-1+k] <- tx[j,D-1+k] / m;
+        } else {
+          tx[j,D-1+k] <- td[j-1,k];
+        }
       }
     }
   }
@@ -70,7 +81,14 @@ while (i < N) {
 
   # Append last row to validation entry 
   for (k in 1:D) {
-    vx[1, D-1+k] <- d[i, k];
+        if (i > m) {
+          for (l in 1:m) {
+            vx[1,D-1+k] <- d[i-l,D-1+k] + a[l]*d[i-l,D-1+k];
+          }
+            vx[1,D-1+k] <- d[i-l,D-1+k] / m
+        } else {
+          vx[1,D-1+k] <- d[i-1,k];
+        }
   }
     
   # Classifier models
