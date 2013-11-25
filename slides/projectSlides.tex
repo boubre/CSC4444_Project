@@ -12,6 +12,9 @@
 	\frame{\titlepage}
 	
 	\section{Project Overview}
+
+
+
 	\begin{frame}
 		\frametitle{Project Overview}
 		\begin{itemize}
@@ -21,6 +24,12 @@
 			\item How far back should we look and what information should we include?
 		\end{itemize}
 	\end{frame}
+
+	% Time series, multivariate, stochastic
+	% Our task is prediction of the next time series value: given all the time-dependent data up to
+	% this point, we want to know the value of some class for the next iteration/time.
+	% E.g. ..
+
 	
 	\section{Background}
 	\subsection{Naive Bayes}
@@ -214,13 +223,37 @@
 		\end{columns}
 	\end{frame}
 	
+	
+	
+	% Multivariate stochastic time series T with attributes A1, A2, .. AN, class value C
+	% Unique challenges with time series, particularly with validation
+	% We have to split the series up into T[1:i], train on that data to create a model,
+	%   then using that model, predict T[i+1].
+	% We can't do k-fold cross-validation (explain why).
+	% Since the time series is stochastic, to some extent the attribute and class values
+	%   for this iteration T[i] will depend on values of the previous iterations T[1:i-1].
+	% Our conjecture is that adding derived attributes D1, D2, .. DM which are based on
+	% values of attributes for previous iterations will improve classification accuracy
+	% because they add information which has predictive power.
+	% We test hypotheses H1, H2, H3 .. against H0, which is the classication task done
+	% with the raw data set (only native attributes).
+	% Hypotheses H1, H2, H3 .. consist of computing derived attributes D1, D2, .. DM,
+	% then running the new data set through the same classifiers to observe the difference
+	% in classifier accuracy (and variance accounted for in the principal components due
+	% to the derived attributes).
+	\section{Experimental Design}
+
+
+	% We use the classifier functions in R
+	% The major part of our implementation is computing the derived attributes
+	% and processing the data set for testing and validation
 	\section{Implementation}
 	
-	
-	\section{Experimental Design}
-	
-	
+
+	% Table: data sets vs. models vs. accuracies given different hypotheses H1, H2, .. H0.
+	% Graph of the same.
 	\section{Experimental Results}
 	
+
 	
 \end{document}
