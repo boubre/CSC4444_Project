@@ -223,6 +223,7 @@
 	% Our conjecture is that adding derived attributes D1, D2, .. DM which are based on
 	% values of attributes for previous iterations will improve classification accuracy
 	% because they add information which has predictive power.
+	% -----
 	% We test hypotheses H1, H2, H3 .. against H0, which is the classication task done
 	% with the raw data set (only native attributes).
 	% Hypotheses H1, H2, H3 .. consist of computing derived attributes D1, D2, .. DM,
@@ -231,7 +232,7 @@
 	% to the derived attributes).
 	\section{Experimental Design}
 	\subsection{Setup}
-	\frame{ \frametitle{Experimental Setup}
+	\frame{ \frametitle{Experiment Setup}
 		\begin{itemize}
 			\item We are given a time series \(T\) where each entry has attributes \(A_1, A_2, ..., A_N\) and classes value \(C\).
 			\item Cannot use k-fold cross-validation. \\
@@ -243,7 +244,34 @@
 			\item Solution: Split series up into partitions of size \(M\). Train model on data entries \(1, 2, ..., (M-1)\) and predict unseen entry \(M\). Tally up number of correct predictions from all partitions in the data set to determine accuracy.
 		\end{itemize}
 	}
+	
+	\frame{ \frametitle{Experimental Conjecture}
+		\begin{itemize}
+			\item Since the time series is stochastic, the attributes and class values of \(T[1:i-1]\) may influence the attributes and class value of \(T[i]\).
+			\item Our conjecture is that adding derived attributes to each element's native attributes can improve classification accuracy. These derived attributes contain information about previous elements in the time series, which gives them predictive power.
+			\item For example, the average weather conditions over the past 10 minutes could help predict the weather condition one minute from now.
+		\end{itemize}
+	}
 
+	\subsection{Design}
+	\frame{ \frametitle{Experiment Design}
+		\begin{itemize}
+			\item Establish hypothesis \(H_0\), which is a classification task done on the raw data set (No derived attributes).
+			\item Create hypotheses \(H_1, H_2, ..., H_N\), which each add different sets of derived attributes to the raw data.
+			\item Run each \(H_i\) through the same classifier and observe the difference in classifier accuracy.
+			\item Repeat this process for new hypotheses and different classifiers.
+			\item Analyze results to determine which Hypotheses perform better with which classifiers, if any.
+		\end{itemize}
+	}
+	
+	\subsection{Hypotheses}
+	\frame{ \frametitle{Hypotheses}
+		\begin{description}
+			\item[\(H_1\)] desc...
+			\item[\(H_2\)] desc...
+		\end{description}
+	}
+	
 	% We use the classifier functions in R
 	% The major part of our implementation is computing the derived attributes
 	% and processing the data set for testing and validation
@@ -253,7 +281,18 @@
 	% Table: data sets vs. models vs. accuracies given different hypotheses H1, H2, .. H0.
 	% Graph of the same.
 	\section{Experimental Results}
-	
+	\frame{ \frametitle{\(H_1\) Results}
+		\begin{center}
+			\begin{tabular}{l | l | c | c}
+				\textbf{Data Set} & \textbf{Classifier} & \textbf{\(H_1\) Acc} & \textbf{\(H_0\) Acc} \\ \hline
+				Sample & Naive Bayes & x\% & y\% \\
+				Sample & SVM & x\% & y\% \\
+				Sample & Neural Net & x\% & y\% \\
+				Sample & KNN & x\% & y\% \\
+				Sample & CART& x\% & y\% \\
+			\end{tabular}
+		\end{center}
+	}
 
 	
 \end{document}
