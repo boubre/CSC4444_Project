@@ -13,7 +13,15 @@
 	
 	\section{Project Overview}
 
-
+	\frame{ \frametitle{Project Overview}
+		\begin{itemize}
+			\item Our project examines classification of time series, multivariate, stochastic data.
+			\item Time series data is sequentially ordered, with each data entry at a later time step or time stamp.
+			\item Unlike regular classification, the order of the data matters and previous entries may impact future classifications.
+			\item Given all time-dependent  data up to a certain point, we want to know the class for the next time value.
+			\item How can we modify existing classifiers to achieve accurate time series predictions?
+		\end{itemize}
+	}
 
 	\frame{ \frametitle{Project Overview}
 		\begin{itemize}
@@ -23,12 +31,6 @@
 			\item How far back should we look and what information should we include?
 		\end{itemize}
 	}
-
-	% Time series, multivariate, stochastic
-	% Our task is prediction of the next time series value: given all the time-dependent data up to
-	% this point, we want to know the value of some class for the next iteration/time.
-	% E.g. ..
-
 	
 	\section{Background}
 	\subsection{Naive Bayes}
@@ -210,13 +212,12 @@
 		\end{columns}
 	}
 	
-	
-	
 	% Multivariate stochastic time series T with attributes A1, A2, .. AN, class value C
 	% Unique challenges with time series, particularly with validation
 	% We have to split the series up into T[1:i], train on that data to create a model,
 	%   then using that model, predict T[i+1].
 	% We can't do k-fold cross-validation (explain why).
+	% -----
 	% Since the time series is stochastic, to some extent the attribute and class values
 	%   for this iteration T[i] will depend on values of the previous iterations T[1:i-1].
 	% Our conjecture is that adding derived attributes D1, D2, .. DM which are based on
@@ -229,7 +230,19 @@
 	% in classifier accuracy (and variance accounted for in the principal components due
 	% to the derived attributes).
 	\section{Experimental Design}
-
+	\subsection{Setup}
+	\frame{ \frametitle{Experimental Setup}
+		\begin{itemize}
+			\item We are given a time series \(T\) where each entry has attributes \(A_1, A_2, ..., A_N\) and classes value \(C\).
+			\item Cannot use k-fold cross-validation. \\
+				\begin{itemize}
+					\item Data order not interchangeable.
+					\item Must predict future entry given past entries.
+					\item The more unseen data we use to make predictions, the less accurate future predictions become. (Think of weather predictions.)
+				\end{itemize}
+			\item Solution: Split series up into partitions of size \(M\). Train model on data entries \(1, 2, ..., (M-1)\) and predict unseen entry \(M\). Tally up number of correct predictions from all partitions in the data set to determine accuracy.
+		\end{itemize}
+	}
 
 	% We use the classifier functions in R
 	% The major part of our implementation is computing the derived attributes
