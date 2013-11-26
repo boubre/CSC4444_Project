@@ -15,15 +15,14 @@
 
 
 
-	\begin{frame}
-		\frametitle{Project Overview}
+	\frame{ \frametitle{Project Overview}
 		\begin{itemize}
 			\item Test a variety of different classifiers on different data sets.
 			\item Can we improve classification accuracy of time-series data by adding attributes to current data from previous data?
 			\item For example, does informing a classifier of the class of the previous \(n\) entries improve prediction accuracy for the current observation?
 			\item How far back should we look and what information should we include?
 		\end{itemize}
-	\end{frame}
+	}
 
 	% Time series, multivariate, stochastic
 	% Our task is prediction of the next time series value: given all the time-dependent data up to
@@ -34,8 +33,7 @@
 	\section{Background}
 	\subsection{Naive Bayes}
 	\subsubsection{Overview}
-	\begin{frame}
-		\frametitle{The Naive Bayes Classifier}
+	\frame{ \frametitle{The Naive Bayes Classifier}
 		\begin{itemize}
 			\item Reduce classification to probability. What is \(P(class | attribute1, attribute2, ..., attributeN)\).
 			\item Assumes that each attribute is independent of the others. (Hence the ``Naive'' nickname.)
@@ -43,11 +41,10 @@
 			\item Naive Bayes is not sensitive to irrelevant attributes, since the probabilities of such attributes will be similar for all classes.
 			\item Naive Bayes is quick to train, as it requires only one pass-though of the training data.
 		\end{itemize}
-	\end{frame}
+	}
 	
 	\subsubsection{Example}
-	\begin{frame}
-		\frametitle{Naive Bayes in Action}
+	\frame{ \frametitle{Naive Bayes in Action}
 		\begin{center} 
 			\textbf{Training Data} \\
 			\begin{tabular}{c | c | c || c}
@@ -61,10 +58,9 @@
 			\small{Only discrete values shown, but we can still interpret real data using normal distributions!}
 		\end{center}
 			Suppose we are given an unseen data point \(\langle No, Blue, Short \rangle\). What should we classify it as?
-	\end{frame}
+	}
 	
-	\begin{frame}
-		\frametitle{Naive Bayes in Action}
+	\frame{ \frametitle{Naive Bayes in Action}
 		\begin{tabular}{l}
 		\(P(Male|No,Blue,Short)\) \\
 		\(=\dfrac{P(No,Blue,Short|Male) P(Male)}{P(No,Blue,Short)}\) \\
@@ -77,23 +73,21 @@
 		\end{tabular} \\
 		\vspace{10px}
 		Since \(P(Male|Data) > P(Female|Data)\), we classify the unseen point as Male. For multiple classes, just select the class with the greatest probability!
-	\end{frame} 
+	} 
 	
 	\subsection{Support Vector Machine}
 	\subsubsection{Overview}
-	\begin{frame}
-		\frametitle{Support Vector Machines (SVM)}
+	\frame{ \frametitle{Support Vector Machines (SVM)}
 		\begin{itemize}
 			\item Idea is to draw a line (or hyperplane) between the data points of different classes. Classify unseen data by testing which side of the line it is on.
 			\item Focus on support vectors, or the points that would change the line if removed from the training data.
 			\item Find an optimal line to separate the data. Such a line will have the larger margin for data points and should mis-classify the least number of new points.
 			\item If data is not linearly separable, then a transformation of the data to a new basis can be performed. The data may be linearly separable in the new basis.
 		\end{itemize}
-	\end{frame}
+	}
 	
 	\subsubsection{Example}
-	\begin{frame}
-		\frametitle{SVM Example}
+	\frame{ \frametitle{SVM Example}
 		\begin{columns}[t]
 			\column{.5\textwidth}
 			\begin{figure}
@@ -109,12 +103,11 @@
 				\item It is easy to see how new points are classified.
 			\end{itemize}
 		\end{columns}
-	\end{frame}
+	}
 	
 	\subsection{Neural Network}
 	\subsubsection{Overview}
-	\begin{frame}
-		\frametitle{Neural Networks}
+	\frame{ \frametitle{Neural Networks}
 		\begin{itemize}
 			\item Inspired by biological neurons.
 			\item Neurons maintain a weighted sum of their inputs. The result of this sum is passed into a function and output. (A step function produces on/off signals while a Sigmoid will produce continues levels of activation.)
@@ -122,20 +115,18 @@
 			\item In a feed-forward network, the backwards propagation algorithm accomplishes this.
 			\item Networks with multiple layers can classify various types of non-linearly separable data.
 		\end{itemize}
-	\end{frame}
+	}
 	
 	\subsubsection{Structure and Classification}
-	\begin{frame}
-		\frametitle{An Artificial Neuron}
+	\frame{ \frametitle{An Artificial Neuron}
 		\begin{figure}
 			\centering
 			\includegraphics[keepaspectratio,scale=.9]{NN_1.jpg} \\
 			\Tiny{Image from \url{http://www.ai-junkie.com/ann/evolved/nnt1.html}}
 		\end{figure}
-	\end{frame}
+	}
 	
-	\begin{frame}
-		\frametitle{Neural Network Classification}
+	\frame{ \frametitle{Neural Network Classification}
 		\begin{columns}[t]
 			\column{.5\textwidth}
 			\begin{figure}
@@ -151,12 +142,11 @@
 				\item Hidden layers perform intermediary manipulations of signals. More hidden layers can be added as needed.
 			\end{itemize}
 		\end{columns}
-	\end{frame}
+	}
 	
 	\subsection{K-Nearest Neighbor (KNN)}
 	\subsubsection{Overview}
-	\begin{frame}
-		\frametitle{K-Nearest Neighbor}
+	\frame{ \frametitle{K-Nearest Neighbor}
 		\begin{itemize}
 			\item Assumes that data vectors lie in a metric space.
 			\item Training is simple. KNN stores all of the training data points with no computation. (KNN is lazy.) 
@@ -164,11 +154,10 @@
 			\item Can also weight votes based on the distance of the the neighbors.
 			\item KNN suffers from the curse of dimensionality. (In high dimensions points start to become equidistant. This means metrics such as Euclidean distance become unhelpful.)
 		\end{itemize}
-	\end{frame}
+	}
 	
 	\subsubsection{Example}
-	\begin{frame}
-		\frametitle{KNN Example}
+	\frame{ \frametitle{KNN Example}
 		\begin{columns}[t]
 			\column{.5\textwidth}
 			\begin{figure}
@@ -186,12 +175,11 @@
 				\item Weighting votes by distance may shift favor back to red.
 			\end{itemize}
 		\end{columns}
-	\end{frame}
+	}
 	
 	\subsection{CART}
 	\subsubsection{Overview}
-	\begin{frame}
-		\frametitle{Classification and Regression Tree (CART)}
+	\frame{ \frametitle{Classification and Regression Tree (CART)}
 		\begin{itemize}
 			\item Create binary decision trees. Minimize the error in each leaf.
 			\item Produces a classification tree for categorical data and a regression tree for numerical data.
@@ -200,11 +188,10 @@
 			\item Each internal node is a decision.
 			\item Each leaf is a classification, which classifies according to majority vote of training data that follows that tree path.
 		\end{itemize}
-	\end{frame}
+	}
 	
 	\subsubsection{Example}
-	\begin{frame}
-		\frametitle{CART Example}
+	\frame{ \frametitle{CART Example}
 		\begin{columns}[t]
 			\column{.5\textwidth}
 			\begin{figure}
@@ -221,7 +208,7 @@
 				\item To classify unseen data point simply follow the tree until a leaf node is met.
 			\end{itemize}
 		\end{columns}
-	\end{frame}
+	}
 	
 	
 	
