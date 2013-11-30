@@ -49,6 +49,12 @@ while (i < N) {
   ty <- td[1:i, D];
   ty <- as.factor(ty);
 
+# Training data
+  td <-  d[1:i,  ];
+  tx <- td[1:i,-D];
+  ty <- td[1:i, D];
+  ty <- as.factor(ty);
+
   # Append last class value to training data
   tx[1,D] <- td[1,D];
   if (i > 1) {

@@ -1,0 +1,4 @@
+for file in `ls test*R`
+do
+	R CMD BATCH $file
+done

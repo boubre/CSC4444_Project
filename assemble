@@ -1,0 +1,4 @@
+for file in `ls hypo*R`
+do
+	cat prefix.R $file suffix.R > `echo $file | sed 's/hypo/test/'` 
+done
