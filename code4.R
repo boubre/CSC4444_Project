@@ -28,17 +28,19 @@ f <- as.formula(f);
 init=4;
 i=init;
 
+bayes_dat <- data.frame(matrix(nrow=4, ncol=4));
+knn_dat <- data.frame(matrix(nrow=4, ncol=4));
+svm_dat <- data.frame(matrix(nrow=4, ncol=4));
+
   # How many entries, beta value
 for (m in 2:4) {
-
-  # Normalization constant
-  norm <- 0;
-  for (j in 1:m) {
-    norm <- norm + 1/(b^j);
-  }
-
-
 for (b in 2:4) {
+
+# Normalization constant
+norm <- 0;
+for (j in 1:m) {
+  norm <- norm + 1/(b^j);
+}
 
 # Weights
 a <- vector();

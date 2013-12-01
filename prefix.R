@@ -4,9 +4,12 @@ library(neuralnet);
 library(kernlab);
 library(animation);
 
+datafiles <- list.files(pattern="*csv", full.names=TRUE)
+for (datafile in datafiles) {
+
 
 # Read data 
-d <- read.table("example.csv", sep=",", header=TRUE);
+d <- read.table(datafile, sep=",", header=TRUE);
 D <- ncol(d);
 N <- nrow(d);
 

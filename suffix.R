@@ -26,3 +26,4 @@ print(bayes_hits/Nval);
 print(knn_hits/Nval);
 print(svm_hits/Nval);
 
+}
