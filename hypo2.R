@@ -4,8 +4,6 @@
     tx[1,D-1+k] <- td[1,k];
   }
   if (i > 1) {
-    # Time series
-    T[[i]] <- ts(td);
     for (j in 2:i) {
       for (k in 1:D) {
         tx[j,D-1+k] <- td[j-1,k];

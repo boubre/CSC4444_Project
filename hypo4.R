@@ -1,7 +1,7 @@
 
   # How many entries, beta value
-  m <- 3;
-  b <- 2;
+  for (m in 2:4) {
+  for (b in 2:4) {
 
   # Normalization constant
   norm <- 0;
@@ -61,3 +61,5 @@
     }
   }
 
+}
+}
