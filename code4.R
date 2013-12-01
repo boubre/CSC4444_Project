@@ -1,9 +1,13 @@
 # Required libraries
+library(rpart);
+library(rpart.plot);
 library(e1071);
 library(neuralnet);
 library(kernlab);
 library(animation);
 
+datafiles <- list.files(pattern="*csv", full.names=TRUE)
+for (datafile in datafiles) {
 
 # Read data 
 d <- read.table("example.csv", sep=",", header=TRUE);
@@ -31,10 +35,12 @@ i=init;
 bayes_dat <- data.frame(matrix(nrow=4, ncol=4));
 knn_dat <- data.frame(matrix(nrow=4, ncol=4));
 svm_dat <- data.frame(matrix(nrow=4, ncol=4));
+ann_dat <- data.frame(matrix(nrow=4, ncol=4));
+cart_dat <- data.frame(matrix(nrow=4, ncol=4));
 
   # How many entries, beta value
-for (m in 2:4) {
-for (b in 2:4) {
+for (m in 2:6) {
+for (b in 2:6) {
 
 # Normalization constant
 norm <- 0;
@@ -54,6 +60,8 @@ a <- a / norm;
 bayes_hits <- 0;
 knn_hits   <- 0;
 svm_hits   <- 0;
+ann_hits   <- 0;
+cart_hits   <- 0;
 
 # Loop over data
 while (i < N) {
@@ -115,6 +123,7 @@ while (i < N) {
   bayes <- naiveBayes(x=tx, y=ty);
   knn   <- knn(td, vd, cl=ty);
   svm   <- svm(tx, ty, gamma=10, type="C-classification", scale=FALSE);
+  cart  <- rpart(formula=f, data=td, method="class");
 
 
   # Increment _hits for each correct classification
@@ -127,6 +136,14 @@ while (i < N) {
   if (predict(svm, vx)==vy) {
     svm_hits <- svm_hits + 1;
   }
+  if (colnames(predict(cart,vx))[which.max(predict(cart, vx))] == vy) {
+    cart_hits <- cart_hits + 1;
+  }
+  # Binary only
+  if (abs( prediction(ann)$rep1[i-1,D] - d[i-1,D] ) < .5) {
+    ann_hits <- ann_hits + 1;
+  }
+
 
   i<-i+1;
 
@@ -138,12 +155,18 @@ while (i < N) {
   bayes_dat[m, b] <- bayes_hits/Nval;
   knn_dat[m, b]   <- knn_hits/Nval;
   svm_dat[m, b]   <- svm_hits/Nval;
+  ann_dat[m, b]   <- ann_hits/Nval;
+  cart_dat[m, b]  <- cart_hits/Nval;
 
   print(paste("bayes", m, b, bayes_hits/Nval));
   print(paste("knn",   m, b, knn_hits/Nval));
   print(paste("svm",   m, b, svm_hits/Nval));
+  print(paste("ann",   m, b, ann_hits/Nval));
+  print(paste("cart",  m, b, cart_hits/Nval));
+
+  i <- init;
 
 }
 }
 
-
+}

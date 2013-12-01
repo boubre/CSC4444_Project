@@ -1,4 +1,21 @@
+for file in `ls hypo*R`
+do
+	cat prefix.R $file suffix.R > `echo $file | sed 's/hypo/test/'` 
+        num=`echo $file | sed 's/hypo\(.\).R/\1/'`
+	echo "Assembling H$num"
+done
+
 for file in `ls test*R`
 do
 	R CMD BATCH $file
+        num=`echo $file | sed 's/test\(.\).R/\1/'`
+	echo "Running H$num"
 done
+
+for file in `ls code*R`
+do 
+	R CMD BATCH $file
+        num=`echo $file | sed 's/code\(.\).R/\1/'`
+	echo "Running H$num"
+done
+

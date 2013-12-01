@@ -1,4 +1,6 @@
 # Required libraries
+library(rpart);
+library(rpart.plot);
 library(e1071);
 library(neuralnet);
 library(kernlab);
@@ -40,11 +42,15 @@ i=init;
 bayes_hits <- 0;
 knn_hits   <- 0;
 svm_hits   <- 0;
+cart_hits  <- 0;
+ann_hits   <- 0;
 
 
 # Loop over data
 while (i < N) {
 
+
+  print(paste("Iteration: ", i));
 
   # Training data
   td <-  d[1:i,  ];
