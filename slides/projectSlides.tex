@@ -15,24 +15,28 @@
     \section{Project Overview}
     \frame{ \frametitle{Project Overview}
         \begin{itemize}
-            \item Our project examines classification of time series, multivariate, stochastic data.
-            \item Time series data is sequentially ordered, with each data entry at a later time step or time stamp.
-            \item Unlike regular classification, the order of the data matters and previous entries may impact future classifications.
-            \item Given all time-dependent  data up to a certain point, we want to know the class for the next time value.
-            \item How can we modify existing classifiers to achieve accurate time series predictions?
+            \item Time series data is time-ordered, with each data entry at a later time step or stamp.
+            \item Given a prediction task, unlike with regular data sets, the order of the data matters; e.g. using previous time-ordered values to predict the next value in a series.
+            \item Given all time-dependent data up to a certain point, our task is to predict the class value for the next time step.
+            \item Our project examines feature extraction on multivariate stochastic time series data  to maximize classification accuracy for various classifiers (Naive Bayes, neural network, SVM, KNN, and CART).
+            \item How can we do feature extraction on attribute values for previous time steps to achieve accurate predictions?
         \end{itemize}
     }
 
 
     \frame{ \frametitle{Project Overview}
         \begin{itemize}
-            \item Test a variety of different classifiers on different data sets.
-            \item Can we improve classification accuracy of time-series data by
-	      adding attributes to current data from previous data?
-            \item For example, does informing a classifier of the class of the
+            \item For our base model, we use the raw attribute set. We use this
+	      model as a comparison for our other models.
+            \item To generate other models, we improve add attributes to current data 
+	      from previous data.
+            \item For example, we hypothesize: does informing a classifier of the class of the
 	      previous \(n\) entries improve prediction accuracy for the
-	      current observation?
-            \item How far back should we look and what information should we include?
+	      current observation? We create a model wherein our derived attributes consist
+	      of the class values for the previous $n$ entries.
+            \item Our overarching goal is to find the relationship between classifier
+	      accuracy and how much previous data to include; what are the trade-offs 
+	      of deriving large amounts of data; how should the data be incorporated.
         \end{itemize}
     }
 
@@ -42,14 +46,11 @@
     \subsubsection{Overview}
     \frame{ \frametitle{The Naive Bayes Classifier}
         \begin{itemize}
-            \item Reduce classification to probability. What is \(P(class | attribute1, attribute2, ..., attributeN)\).
+            \item Reduce classification to a computation of probabilities. What is \(P(class | attribute1, attribute2, ..., attributeN)\).
             \item Assumes that each attribute is independent of the others. (Hence the ``Naive'' nickname.)
             \item For example, let's consider if a car is stolen using \(P(stolen |
 	      Color, Type)\). Naive Bayes will assume \(color=red\) and
 	      \(type=sportscar\) to be independent.
-            \item Naive Bayes is not sensitive to irrelevant attributes, since the
-	      probabilities of such attributes will be similar for all classes.
-            \item Naive Bayes is quick to train, as it requires only one pass-though of the training data.
         \end{itemize}
     }
 
@@ -66,7 +67,7 @@
                 Yes & Brown & Short & Male \\ \hline
                 Yes & Brown & Short & Female \\
             \end{tabular}  \\
-            \small{Only discrete values shown, but we can still interpret real data using normal distributions!}
+            \small{Only discrete values shown, but we can still apply numeric data using standard deviations if the data is normally distributed.}
         \end{center}
             Suppose we are given an unseen data point \(\langle No, Blue, Short \rangle\). What should we classify it as?
     }
@@ -119,9 +120,9 @@
             
             \column{.5\textwidth}
             \begin{itemize}
-                \item Solid Figures are support vectors.
-                \item Due to the maximized margin, unseen figures can be closer to
-		  the line than the support vectors and still be correctly
+                \item Solid points are support vectors.
+                \item With a maximized margin, unseen figures closer to
+		  the line than the support vectors are still correctly
 		  classified.
                 \item It is easy to see how new points are classified.
             \end{itemize}
@@ -167,8 +168,7 @@
             \column{.5\textwidth}
             \begin{itemize}
                 \item Information is fed into the input layer.
-                \item The outputs of the neurons in the output layer represent classifications.
-                \item Hidden layers perform intermediary manipulations of signals. More hidden layers can be added as needed.
+                \item The outputs of the neurons in the output layer represent predicted class values.
             \end{itemize}
         \end{columns}
     }
@@ -178,15 +178,12 @@
     \subsubsection{Overview}
     \frame{ \frametitle{K-Nearest Neighbor}
         \begin{itemize}
-            \item Assumes that data vectors lie in a metric space.
-            \item Training is simple. KNN stores all of the training data points with no computation. (KNN is lazy.) 
-            \item Classification is also simple. To classify point \(x\), find the
+            \item Assumes that data vectors lie in a metric space (a distance measure can
+	      be computed).
+            \item Classification is simple. To classify point \(x\), find the
 	      k points in the training data closest to \(x\). Classify \(x\) as
-	      the majority vote its k-nearest neighbors.
-            \item Can also weight votes based on the distance of the the neighbors.
-            \item KNN suffers from the curse of dimensionality. (In high dimensions
-	      points start to become equidistant. This means metrics such as
-	      Euclidean distance become unhelpful.)
+	      the majority vote of its k-nearest neighbors' class.
+            \item Can also weight votes based on the distance of the neighbors.
         \end{itemize}
     }
 
@@ -269,8 +266,8 @@
     \frame{ \frametitle{Experimental Conjecture}
         \begin{itemize}
             \item Since the time series is stochastic, the attributes and class
-	      values of \(T[1:i-1]\) may influence the attributes and class
-	      value of \(T[i]\).
+	      values of \(T[1:i-1]\) may influence the attribute and class
+	      values of \(T[i]\).
             \item Our conjecture is that adding derived attributes to each
 	      element's native attributes can improve classification accuracy.
 	      These derived attributes contain information about previous
@@ -309,6 +306,28 @@
         \end{itemize}
     }
 
+
+    \subsection{Data}
+    \frame{ \frametitle{Data}
+        \begin{itemize}
+            \item A
+            \item B
+            \item C
+            \item D
+            \item E
+        \end{itemize}
+    }
+
+    \subsection{Data}
+    \frame{ \frametitle{Data}
+        \begin{itemize}
+            \item A
+            \item B
+            \item C
+            \item D
+            \item E
+        \end{itemize}
+    }
 
     \section{Implementation}
 
