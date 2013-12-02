@@ -282,7 +282,7 @@
     \subsection{Design}
     \frame{ \frametitle{Experiment Design}
         \begin{itemize}
-            \item Establish hypothesis \(H_0\), which is a classification task done on the raw data set (No derived attributes).
+            \item Establish model \(H_0\), which is a classification task done on the raw data set (No derived attributes).
             \item Create hypotheses \(H_1, H_2, ..., H_N\), which each add different sets of derived attributes to the raw data.
             \item Run each \(H_i\) through the same classifier and observe the difference in classifier accuracy.
             \item Repeat this process for new hypotheses and different classifiers.
@@ -297,65 +297,103 @@
 	      class as an attribute of the data set and shift the column up by one.
             \item In \(H_2\) we use as derived attributes the previous values for the native attributes. To do so, we simply
 	      copy the attribute data set and shift the column up by one.
-            \item \(H_3\) is similar to \(H_2\) but uses $m$ previous rows of the data.
-            \item In \(H_4\) we use as derived attributes simple moving averages (MAs) of the previous $m$ values.  If $i$ is the
-	      index of the current datum for a given attribute, we define the MA as $\sum_{j=1}^m \alpha_j x_{i-j}$. For a simple
-	      moving average, all $\alpha$'s have equal weights.
-            \item In \(H_5\) we use as derived attributes exponential moving averages (MAs) of the previous $m$ values.   For an 
-	      exponential moving average, all $\alpha$'s have weights which are proportional to $i$. 
+            \item In \(H_3\) we use as derived attributes exponential moving averages (MAs) of the previous $m$ values.  
+	      The MA is defined as $\sum_{j=1}^m \alpha_j x_{i-j}$.  For an exponential moving average, all $\alpha$'s have 
+	      weights which are proportional to $i$. 
         \end{itemize}
     }
 
 
     \subsection{Data}
-    \frame{ \frametitle{Data}
+
+    \frame{ \frametitle{Data: Glucose Levels of a Diabetic}
         \begin{itemize}
-            \item ISTANBUL STOCK EXCHANGE Data Set 
-	    \item Attributes: day, month, year, ISE, SP, DAX, FTSE, NIKKEI, BOVESPA, EU
-	    \item Class: EMI up/down.
-	    %\item C Paper: Akbilgic, O., Bozdogan, H., Balaban, M.E., (2013) A novel Hybrid RBF Neural Networks model as a forecaster, Statistics and Computing. DOI 10.1007/s11222-013-9375-7 
-            %PhD Thesis: Oguz Akbilgic, (2011) Hibrit Radyal Tabanlı Fonksiyon Ağları ile Değişken Seçimi ve Tahminleme: Menkul Kıymet Yatırım Kararlarına İlişkin Bir Uygulama, Istanbul University
+	    \item Time series which tells whether glucose level is relatively abnormal
+	      (outside of one standard deviation relative to mean glucose level throughout
+	      the time period).
+	    \item Task: Predict whether glucose level for next iteration is normal or
+	      abnormal.
+            \item Attributes: month, day, hour, minute.
+            \item Class: normal/abnormal.
         \end{itemize}
     }
-    \frame{ \frametitle{Data}
+
+    \frame{ \frametitle{Data: EEG Eye Closure}
         \begin{itemize}
-            \item  EEG Eye State Data Set 
             \item  All data is from one continuous EEG measurement with the Emotiv EEG Neuroheadset. The eye state was detected via a camera during the EEG measurement and added later manually to the file after analysing the video frames. 
+	    \item  Task: Tell whether eyes will be open or closed on next iteration.
 	    \item  Attributes: EEG electrode potentials.
 	    \item  Class: Eyes open/closed.
 	 \end{itemize}
     }
 
-    \subsection{Data}
-    \frame{ \frametitle{Data}
+    \frame{ \frametitle{Data: Electricity Consumption}
         \begin{itemize}
-            \item Diabetes Data Set 
-            \item Attributes: month, day, hour, minute.
-            \item Class: normal/abnormal.
-        \end{itemize}
-        \begin{itemize}
-            \item Power Consumption Data
+	    \item Time series data on power consumption of a household over time.
+	    \item Task: predict normality/abnormality of power consumption for future.
             \item Attributes: day, month, year, hour, minute, second, reactive, voltage
             \item Class: normal/abnormal.
         \end{itemize}
     }
 
-    \section{Implementation}
-
-
-    \section{Experimental Results}
-    \frame{ \frametitle{\(H_1\) Results}
-        \begin{center}
-            \begin{tabular}{l | l | c | c}
-                \textbf{Data Set} & \textbf{Classifier} & \textbf{\(H_1\) Acc} & \textbf{\(H_0\) Acc} \\ \hline
-                Sample & Naive Bayes & x\% & y\% \\
-                Sample & SVM & x\% & y\% \\
-                Sample & Neural Net & x\% & y\% \\
-                Sample & KNN & x\% & y\% \\
-                Sample & CART& x\% & y\% \\
-            \end{tabular}
-        \end{center}
+    \frame{ \frametitle{Data: Stock Exchange Data}
+        \begin{itemize}
+	    \item Time series data on the values of stock indices.
+	    \item Task: Predict whether the Emergent Markets Index (EMI) will go up or
+	      down on the next iteration.
+	    \item Attributes: day, month, year, ISE, SP, DAX, FTSE, NIKKEI, BOVESPA, EU
+	    \item Class: EMI up/down.
+        \end{itemize}
     }
+
+    \section{Implementation}
+    \frame{ \frametitle{Implementation}
+    \begin{itemize}
+      \item Our implementation was done in R.  We used packages:
+	\begin{itemize}
+	  \item \textbf{neuralnet} for ANN
+	  \item \textbf{e1071} for BAYES
+	  \item \textbf{rpart} for CART
+	  \item \textbf{e1071} for KNN
+	  \item \textbf{kernlab} for SVM
+	\end{itemize}
+      \item Much of our implementation work dealt with pre-processing the data and adding the
+	derived attributes to our data set for our hypotheses.
+    \end{itemize}
+  }
+
+ \subsection{Results}
+ \frame{ \frametitle{Results}
+ \begin{itemize} 
+     \item Results were generated:
+       \begin{itemize} 
+	 \item For hypotheses 0, 1, 2, and 3
+	 \item Over multiple data sets (diabetes, eeg, electric, stock)
+	 \item Over models (ANN, BAYES, CART, KNN, and SVM)
+	 \item For each iteration in the time series
+       \end{itemize} 
+     \item Thus we have rich data on classifier accuracy that tells us how models
+       and hypotheses perform on data sets as the training data accumulates data
+       from the time series.
+ \end{itemize} 
+ }
+
+
+ \subsection{Conclusion}
+ \frame{ \frametitle{Results}
+ \begin{itemize} 
+     \item Results were generated:
+       \begin{itemize} 
+	 \item For hypotheses 0, 1, 2, and 3
+	 \item Over multiple data sets (diabetes, eeg, electric, stock)
+	 \item Over models (ANN, BAYES, CART, KNN, and SVM)
+	 \item For each iteration in the time series
+       \end{itemize} 
+     \item Thus we have rich data on classifier accuracy that tells us how models
+       and hypotheses perform on data sets as the training data accumulates data
+       from the time series.
+ \end{itemize} 
+ }
 
 
 \end{document}
