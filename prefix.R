@@ -6,7 +6,7 @@ library(neuralnet);
 library(kernlab);
 library(animation);
 
-datafiles <- list.files(pattern="*csv", full.names=TRUE)
+datafiles <- list.files(pattern="*csv$", full.names=TRUE)
 for (datafile in datafiles) {
 
 
@@ -34,7 +34,7 @@ T <- vector(mode="list", length=N-1);
 
 
 # Need at least 4 training entries for Naive Bayes
-init=4;
+init=10;
 i=init;
 
 
@@ -45,6 +45,7 @@ svm_hits   <- 0;
 cart_hits  <- 0;
 ann_hits   <- 0;
 
+x <- data.frame(matrix(ncol=5, nrow=N-init));
 
 # Loop over data
 while (i < N) {

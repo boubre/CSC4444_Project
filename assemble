@@ -1,4 +1,6 @@
 for file in `ls hypo*R`
 do
-	cat prefix.R $file suffix.R > `echo $file | sed 's/hypo/test/'` 
+	num=`echo $file | sed 's/hypo\(.\).R/\1/'`
+	echo "num=$num;"              > `echo $file | sed 's/hypo/test/'` 
+	cat prefix.R $file suffix.R >> `echo $file | sed 's/hypo/test/'` 
 done
