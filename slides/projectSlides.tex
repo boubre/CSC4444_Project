@@ -310,29 +310,33 @@
     \subsection{Data}
     \frame{ \frametitle{Data}
         \begin{itemize}
-            \item A ISTANBUL STOCK EXCHANGE Data Set 
-            \item B Attribute Information:
-                       Day  Month  Year	      ISE	                   ISE   	      SP	          DAX	      FTSE	        NIKKEI           BOVESPA	         EU	         GrtrThanYesterday
-                       6       1	       9	0.025425873        0.031812743	0.007786738     0.008455341	0.012865611    0.004162452     0.01891958	    0.011340652	0
-                       7       1         9	-0.02886173       -0.026352966	-0.030469134    -0.017833062	-0.028734593  0.017292932    -0.035898576   -0.017072795	0
-                       8      1	      9	-0.062208079     -0.084715902	0.003391364     -0.011726277	-0.000465999  -0.040061309    0.028283152    -0.005560959	1
-            \item C Paper: Akbilgic, O., Bozdogan, H., Balaban, M.E., (2013) A novel Hybrid RBF Neural Networks model as a forecaster, Statistics and Computing. DOI 10.1007/s11222-013-9375-7 
-                        PhD Thesis: Oguz Akbilgic, (2011) Hibrit Radyal Tabanlı Fonksiyon Ağları ile Değişken Seçimi ve Tahminleme: Menkul Kıymet Yatırım Kararlarına İlişkin Bir Uygulama, Istanbul University
-             \item D  EEG Eye State Data Set 
-            \item E   Data Set Information: All data is from one continuous EEG measurement with the Emotiv EEG Neuroheadset. The duration of the measurement was 117 seconds. The eye state was detected via a camera during the EEG
-                         measurement and added later manually to the file after analysing the video frames. '1' indicates the eye-closed and '0' the eye-open state. All values are in chronological order with the first measured value at the top of the data.
+            \item ISTANBUL STOCK EXCHANGE Data Set 
+	    \item Attributes: day, month, year, ISE, SP, DAX, FTSE, NIKKEI, BOVESPA, EU
+	    \item Class: EMI up/down.
+	    %\item C Paper: Akbilgic, O., Bozdogan, H., Balaban, M.E., (2013) A novel Hybrid RBF Neural Networks model as a forecaster, Statistics and Computing. DOI 10.1007/s11222-013-9375-7 
+            %PhD Thesis: Oguz Akbilgic, (2011) Hibrit Radyal Tabanlı Fonksiyon Ağları ile Değişken Seçimi ve Tahminleme: Menkul Kıymet Yatırım Kararlarına İlişkin Bir Uygulama, Istanbul University
         \end{itemize}
+    }
+    \frame{ \frametitle{Data}
+        \begin{itemize}
+            \item  EEG Eye State Data Set 
+            \item  All data is from one continuous EEG measurement with the Emotiv EEG Neuroheadset. The eye state was detected via a camera during the EEG measurement and added later manually to the file after analysing the video frames. 
+	    \item  Attributes: EEG electrode potentials.
+	    \item  Class: Eyes open/closed.
+	 \end{itemize}
     }
 
     \subsection{Data}
     \frame{ \frametitle{Data}
         \begin{itemize}
-            \item A  Diabetes Data Set 
-            \item B  Data Set Information:
-                       	month	day	hour	minute	value
-                      1	4	21	9	9	0
-                      2	4	21	9	9	-1
-            \item C Jeroen Eggermont and Joost N. Kok and Walter A. Kosters. Genetic Programming for data classification: partitioning the search space. SAC. 2004.
+            \item Diabetes Data Set 
+            \item Attributes: month, day, hour, minute.
+            \item Class: normal/abnormal.
+        \end{itemize}
+        \begin{itemize}
+            \item Power Consumption Data
+            \item Attributes: day, month, year, hour, minute, second, reactive, voltage
+            \item Class: normal/abnormal.
         \end{itemize}
     }
 
