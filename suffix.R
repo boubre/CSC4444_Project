@@ -11,7 +11,7 @@
   print(paste(" Running CART..."));
   cart  <- rpart(formula=f, data=td, method="class");
 
-  if (abs( prediction(ann)$rep1[i-1,D] - d[i-1,D] ) < .5) {
+  if ( abs(compute(ann, d[i+1,-D])$net.result - vy) > .5) {
     ann_hits <- ann_hits + 1;
   }
   if (predict(bayes, vx)==vy) {
@@ -44,7 +44,7 @@ print(svm_hits   / Nval);
 print(cart_hits  / Nval);
 print(ann_hits   / Nval);
 
-write.csv(x, file=gsub("./","",gsub(" ","",paste(datafile,0))));
+write.csv(x, file=gsub("./","",gsub(" ","",paste(datafile,num))));
 rm(x);
 
 }

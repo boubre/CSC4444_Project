@@ -6,11 +6,11 @@ library(neuralnet);
 library(kernlab);
 library(animation);
 
-datafiles <- list.files(pattern="*csv", full.names=TRUE)
+datafiles <- list.files(pattern="*csv$", full.names=TRUE)
 for (datafile in datafiles) {
 
 # Read data 
-d <- read.table("example.csv", sep=",", header=TRUE);
+d <- read.table(datafile, sep=",", header=TRUE);
 D <- ncol(d);
 N <- nrow(d);
 
@@ -29,7 +29,7 @@ f <- as.formula(f);
 
 
 # Need at least 4 training entries for Naive Bayes
-init=4;
+init=20;
 i=init;
 
 bayes_dat <- data.frame(matrix(nrow=4, ncol=4));
@@ -38,9 +38,9 @@ svm_dat <- data.frame(matrix(nrow=4, ncol=4));
 ann_dat <- data.frame(matrix(nrow=4, ncol=4));
 cart_dat <- data.frame(matrix(nrow=4, ncol=4));
 
-  # How many entries, beta value
-for (m in 2:6) {
-for (b in 2:6) {
+# How many entries, beta value
+for (m in 2:9) {
+for (b in 2:9) {
 
 # Normalization constant
 norm <- 0;
@@ -65,6 +65,8 @@ cart_hits   <- 0;
 
 # Loop over data
 while (i < N) {
+
+  print(paste("Iteration: ", i, m, b, datafile));
 
   # Training data
   td <-  d[1:i,  ];
@@ -140,7 +142,7 @@ while (i < N) {
     cart_hits <- cart_hits + 1;
   }
   # Binary only
-  if (abs( prediction(ann)$rep1[i-1,D] - d[i-1,D] ) < .5) {
+  if ( abs(compute(ann, d[i+1,-D])$net.result - vy) > .5) {
     ann_hits <- ann_hits + 1;
   }
 
@@ -168,5 +170,12 @@ while (i < N) {
 
 }
 }
+
+  write.csv(ann_dat, file=gsub("./","",gsub(" ","",paste(datafile,".ann"))));
+  write.csv(bayes_dat, file=gsub("./","",gsub(" ","",paste(datafile,".bayes"))));
+  write.csv(cart_dat, file=gsub("./","",gsub(" ","",paste(datafile,".cart"))));
+  write.csv(knn_dat, file=gsub("./","",gsub(" ","",paste(datafile,".knn"))));
+  write.csv(svm_dat, file=gsub("./","",gsub(" ","",paste(datafile,".svm"))));
+  
 
 }

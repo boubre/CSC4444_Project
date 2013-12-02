@@ -34,7 +34,7 @@ T <- vector(mode="list", length=N-1);
 
 
 # Need at least 4 training entries for Naive Bayes
-init=10;
+init=20;
 i=init;
 
 
@@ -50,6 +50,7 @@ x <- data.frame(matrix(ncol=5, nrow=N-init));
 # Loop over data
 while (i < N) {
 
+  system('clear');
 
   print(paste("Iteration: ", i));
 
